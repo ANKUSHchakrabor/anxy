@@ -1,177 +1,228 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-  <meta charset="UTF-8">  
-  <title>Love Notes ❤️</title>  
-  <link rel="stylesheet" href="style.css">  
-  <link href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap" rel="stylesheet">  
-  <style>  
-    #nextBtn {  
-      position: fixed;  
-      bottom: 20px;  
-      right: 20px;  
-      background-color: #ff5fa2;  
-      color: white;  
-      padding: 12px 20px;  
-      border: none;  
-      border-radius: 10px;  
-      font-size: 16px;  
-      cursor: pointer;  
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
-      z-index: 999;  
-    }  
-  
-    #videoSection {  
-      display: none;  
-      position: fixed;  
-      top: 50%;  
-      left: 50%;  
-      transform: translate(100%, -50%);  
-      background-color: rgba(255,255,255,0.95);  
-      padding: 30px;  
-      border-radius: 15px;  
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);  
-      z-index: 1000;  
-      max-width: 90%;  
-      max-height: 80%;  
-      opacity: 0;  
-      transition: all 1s ease;  
-      overflow: hidden;  
-    }  
-  
-    #videoSection.show {  
-      transform: translate(-50%, -50%);  
-      opacity: 1;  
-    }  
-  
-    #videoSection video {  
-      width: 100%;  
-      max-width: 400px;  
-      max-height: 70vh;  
-      border-radius: 10px;  
-      display: block;  
-      margin: 0 auto;  
-      object-fit: contain;  
-    }  
-  
-    .slide-out {  
-      animation: slideOut 0.8s forwards;  
-    }  
-  
-    @keyframes slideOut {  
-      to {  
-        opacity: 0;  
-        transform: translateX(-100%);  
-      }  
-    }  
-  </style>  
-</head>  
-<body>  
-  
-<audio id="bgMusic" autoplay loop>  
-  <source src="D:\website - Copy\03 - Tera Rastaa Chhodoon Na-(MyMp3Singer.com).mp3" type="audio/mpeg">  
-  Your browser does not support the audio element.  
-</audio>  
-  
-<div class="paper heart"></div>  
-  
-<div class="paper image" style="transform:rotate(90deg);">
-  <p>cgf</p>  
-  <img src="D:\website - Copy\images\495269520_1433497031163063_6418554914325746774_n.webp" style="transform:rotate(180deg);">
-</div>  
-  
-<div class="paper image">  
-  <p> and I fallen in</p> 
-     <img src="D:\website - Copy\images\494821008_560859857083150_4319070610396635176_n.webp" />  
-  <p>Love with You 😍 </p>  
-</div>   
-  
-<div class="paper image">  
-  <p>How can be </p> 
-    <img src="D:\website\images\494820925_613916134327267_2100328339140854096_n.jpg" /> 
-  <p> someone so cute ❤️ </p>    
-</div>  
-  
-<div class="paper red">  
-  <p>My favorite</p>
-  <img src="D:\website - Copy\images\494822082_1843397993172089_2343736962501136744_n.webp" style="transform:rotate(-90deg);">
-  <p class="p2">Person 😍</p>     
-</div>  
-  
-<div class="paper">  
-  <p class="p1">You are Cute </p>  
-    <img src="D:\website - Copy\images\494823639_677288195070180_6151165161244064682_n.webp" />
-  <p class="p1">Amazing <span style="color: red !important;">❤️</span></p>  
-</div>  
-  
-<div class="paper">  
-  <p class="p1">Drag the papers to move!</p>  
-</div>  
-  
-<button id="nextBtn">Next ➜</button>  
-  
-<div id="videoSection">  
-  <iframe 
-  src="https://streamable.com/3c43nl"
-  width="100%"
-  height="315"
-  frameborder="0"
-  allowfullscreen
-  allow="autoplay">
-</iframe>
-</div>  
-  
-<script src="script.js"></script>  
-<script>  
-  // Autoplay background music  
-  window.addEventListener('DOMContentLoaded', () => {  
-    const audio = document.getElementById('bgMusic');  
-    audio.play().catch(() => {  
-      alert("Hey Disha, tap anywhere to start the music ❤️");  
-      document.body.addEventListener('click', () => {  
-        audio.play();  
-      }, { once: true });  
-    });  
-  });  
-  
-  // Next button: hide papers, stop music, show video & autoplay video  
-  document.getElementById("nextBtn").addEventListener("click", function () {  
-    const papers = document.querySelectorAll(".paper");  
-    papers.forEach((el, i) => {  
-      el.classList.add("slide-out");  
-      setTimeout(() => { el.style.display = "none"; }, 800);  
-    });  
-  
-    const audio = document.getElementById("bgMusic");  
-    audio.pause();  
-    audio.currentTime = 0;  
-  
-    const videoSec = document.getElementById("videoSection");  
-    videoSec.style.display = "block";  
-    setTimeout(() => {  
-      videoSec.classList.add("show");  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Love Notes ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #fff0f5;
+      font-family: 'Short Stack', cursive;
+      overflow: hidden;
+      touch-action: none;
+    }
 
-      // Play video explicitly  
-      const video = document.querySelector("#videoSection video");  
-      video.play().catch((err) => {  
-        console.log("Autoplay blocked:", err);  
-      });  
+    .paper {
+      width: 280px;
+      height: auto;
+      background: #fff8dc;
+      padding: 20px;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transition: transform 0.3s ease;
+    }
 
-    }, 100);  
-  
-    this.style.display = "none";  
-  });  
-  
-  // Pause bg music when video plays manually (extra safety)  
-  const video = document.querySelector("#videoSection video");  
-  const bgMusic = document.getElementById("bgMusic");  
-  
-  video.addEventListener("play", () => {  
-    if (!bgMusic.paused) {  
-      bgMusic.pause();  
-    }  
-  });  
-</script>  
-  
-</body>  
-</html>
+    .paper img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .paper.heart {
+      background: pink;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      left: 120px;
+      top: 80px;
+    }
+
+    #nextBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff5fa2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    #videoSection {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(100%, -50%);
+      background-color: rgba(255,255,255,0.95);
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      z-index: 1000;
+      max-width: 95%;
+      max-height: 80%;
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    #videoSection.show {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+
+    #videoSection video {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .slide-out {
+      animation: slideOut 0.8s forwards;
+    }
+
+    @keyframes slideOut {
+      to {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="D:/website - Copy/03 - Tera Rastaa Chhodoon Na-(MyMp3Singer.com).mp3" type="audio/mpeg">
+</audio>
+
+<!-- 💌 Love Notes -->
+<div class="paper heart"></div>
+
+<div class="paper image">
+  <p>and I fallen in</p>
+  <p>Love with You 😍</p>
+  <img src="D:/website/images/494822082_1843397993172089_2343736962501136744_n.webp" />
+</div>
+
+<div class="paper image">
+  <img src="D:/website/images/494820925_613916134327267_2100328339140854096_n.jpg" />
+</div>
+
+<div class="paper red">
+  <p class="p1">and My Favorite</p>
+  <p class="p2">Person 😍</p>
+</div>
+
+<div class="paper">
+  <p class="p1">You are Cute</p>
+  <p class="p1">Amazing <span style="color: red;">❤️</span></p>
+</div>
+
+<div class="paper">
+  <p class="p1">Drag or touch the papers to move!</p>
+</div>
+
+<!-- ➡️ Next Button -->
+<button id="nextBtn">Next ➜</button>
+
+<!-- 🎬 Video Section -->
+<div id="videoSection">
+  <video controls>
+    <source src="D:/website/video/disha_video.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- 📜 Script -->
+<script>
+  // Play music on first interaction
+  window.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('bgMusic');
+    audio.play().catch(() => {
+      alert("Tap anywhere to start the music ❤️");
+      document.body.addEventListener('click', () => {
+        audio.play();
+      }, { once: true });
+    });
+  });
+
+  // Drag / Touch Logic
+  const papers = document.querySelectorAll('.paper');
+  papers.forEach(paper => {
+    let offsetX, offsetY, isDragging = false;
+
+    // Mouse
+    paper.addEventListener('mousedown', e => {
+      isDragging = true;
+      offsetX = e.clientX - paper.offsetLeft;
+      offsetY = e.clientY - paper.offsetTop;
+      paper.style.zIndex = 1000;
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (isDragging) {
+        paper.style.left = `${e.clientX - offsetX}px`;
+        paper.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch
+    paper.addEventListener('touchstart', e => {
+      const touch = e.touches[0];
+      offsetX = touch.clientX - paper.offsetLeft;
+      offsetY = touch.clientY - paper.offsetTop;
+      isDragging = true;
+      paper.style.zIndex = 1000;
+    });
+
+    document.addEventListener('touchmove', e => {
+      if (isDragging) {
+        const touch = e.touches[0];
+        paper.style.left = `${touch.clientX - offsetX}px`;
+        paper.style.top = `${touch.clientY - offsetY}px`;
+      }
+    });
+
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+  });
+
+  // Next Button logic
+  document.getElementById("nextBtn").addEventListener("click", function () {
+    const paperEls = document.querySelectorAll(".paper");
+    paperEls.forEach(p => {
+      p.classList.add("slide-out");
+      setTimeout(() => p.style.display = "none", 800);
+    });
+
+    // Show video
+    const videoSec = document.getElementById("videoSection");
+    videoSec.style.display = "block";
+    setTimeout(() => videoSec.classList.add("show"), 100);
+
+    this.style.display = "none";
+
+    // Pause background music when video plays
+    const video = videoSec.querySelector("video");
+    video.addEventListener("play", () => {
+      document.getElementById("bgMusic").pause();
+    });
+  });
+</script>
+
+</body>
+  </html>
